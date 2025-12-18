@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for # Added redirect and url_for
 import json
 import os
 
@@ -20,8 +20,11 @@ def save_data(data):
 
 # --- ROUTES ---
 
-# This handles both the main domain and the /home link
 @app.route("/")
+def root():
+    # This automatically sends the user from "/" to "/home"
+    return redirect(url_for('home'))
+
 @app.route("/home")
 def home():
     return render_template("index.html")
@@ -32,15 +35,21 @@ def verify_page():
     if not discord_id:
         return "Error: No Discord ID provided", 400
     
+    # Simple styled verify page to match
     return f"""
     <html>
-        <body style="font-family: Arial; text-align: center; padding-top: 50px;">
-            <h1>Verify for Discord ID: {discord_id}</h1>
-            <form method="post" action="/submit">
-                <input type="hidden" name="discord_id" value="{discord_id}">
-                <input type="text" name="roblox_username" placeholder="Roblox Username" required>
-                <button type="submit">Verify Me</button>
-            </form>
+        <head><title>RoLink | Verify</title></head>
+        <body style="font-family: Arial; text-align: center; padding-top: 100px; background: #f8f9fa;">
+            <div style="background: white; display: inline-block; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <h1 style="color: #dc3545;">RoLink Verification</h1>
+                <p>Discord ID: <strong>{discord_id}</strong></p>
+                <form method="post" action="/submit">
+                    <input type="hidden" name="discord_id" value="{discord_id}">
+                    <input type="text" name="roblox_username" placeholder="Roblox Username" required 
+                           style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 250px;"><br><br>
+                    <button type="submit" style="background: #28a745; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Verify Me</button>
+                </form>
+            </div>
         </body>
     </html>
     """
@@ -54,7 +63,19 @@ def submit():
     data[discord_id] = {"username": roblox_username, "verified": True}
     save_data(data)
 
-    return f"<h1>Success!</h1><p>You verified as {roblox_username}.</p><a href='/'>Go Home</a>"
+    # Branded Success Page
+    return f"""
+    <html>
+        <body style="font-family: Arial; text-align: center; padding-top: 100px; background: #f8f9fa;">
+            <div style="background: white; display: inline-block; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <h1 style="color: #28a745;">✅ Success!</h1>
+                <p>You have been verified as <strong>{roblox_username}</strong></p>
+                <p>You can now return to Discord.</p>
+                <a href="/home" style="color: #dc3545; text-decoration: none; font-weight: bold;">← Back to Home</a>
+            </div>
+        </body>
+    </html>
+    """
 
 @app.route("/api/verify-status")
 def api_status():
@@ -64,10 +85,10 @@ def api_status():
 
     data = load_data()
     user = data.get(discord_id, {})
-    return jsonify({
+    return jsonify({{
         "verified": user.get("verified", False),
         "username": user.get("username")
-    })
+    }})
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
