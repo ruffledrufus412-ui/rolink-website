@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- DATA HANDLING (KEEP THIS) ---
+# --- DATA HANDLING ---
 DATA_FILE = "verified.json"
 if not os.path.exists(DATA_FILE):
     with open(DATA_FILE, "w") as f:
@@ -18,11 +18,12 @@ def save_data(data):
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=4)
 
-# --- ROUTES (KEEP THESE, BUT SIMPLIFIED) ---
+# --- ROUTES ---
 
+# This handles both the main domain and the /home link
 @app.route("/")
+@app.route("/home")
 def home():
-    # This now pulls from templates/index.html
     return render_template("index.html")
 
 @app.route("/verify")
@@ -31,8 +32,6 @@ def verify_page():
     if not discord_id:
         return "Error: No Discord ID provided", 400
     
-    # For now, we are keeping this HTML string here 
-    # until you are ready to make verify.html
     return f"""
     <html>
         <body style="font-family: Arial; text-align: center; padding-top: 50px;">
