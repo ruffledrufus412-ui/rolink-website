@@ -118,25 +118,45 @@
         }
         .card-content { flex-grow: 1; }
 
-        /* --- STATS SECTION --- */
-        .stats-section {
-            display: flex; justify-content: space-around;
-            background: var(--card-bg);
+        /* --- NEW SPEED CALLOUT SECTION STYLES --- */
+        .speed-callout-section {
+            background: linear-gradient(135deg, #1e1e23, #111114);
             border-radius: 20px;
             border: 1px solid var(--border);
-            padding: 40px 60px;
             margin: 0 8% 60px;
-        }
-        .stat-item {
+            padding: 40px 50px;
             text-align: center;
-            padding: 0 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-        .stat-number {
-            font-size: 44px; font-weight: 800; color: var(--primary); margin: 0;
+        .speed-callout-section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
         }
-        .stat-label {
-            font-size: 16px; color: #fff; margin-top: 5px; font-weight: 600;
+        .speed-callout-section p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
         }
+        .speed-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .speed-metric-item {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        .speed-metric-item i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
 
         /* --- WHY CHOOSE ROLINK SECTION --- */
         .why-grid {
@@ -249,15 +269,14 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            .stats-section {
-                flex-wrap: wrap;
-                padding: 30px 10px;
+            .speed-callout-section {
                 margin: 0 5% 40px;
-                border-radius: 15px;
+                padding: 30px;
             }
-            .stat-item {
-                width: 50%; /* 2 per row */
-                margin-bottom: 20px;
+            .speed-metrics {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
             }
             .why-grid, .engineering-content, .faq-grid {
                 grid-template-columns: 1fr; /* Stack columns */
@@ -337,26 +356,22 @@
             </div>
         </div>
     </div>
-
-    <div class="stats-section">
-        <div class="stat-item">
-            <p class="stat-number">2.5M+</p>
-            <p class="stat-label">Verified Users</p>
-        </div>
-        <div class="stat-item">
-            <p class="stat-number">1,800+</p>
-            <p class="stat-label">Servers Integrated</p>
-        </div>
-        <div class="stat-item">
-            <p class="stat-number">99.9%</p>
-            <p class="stat-label">Guaranteed Uptime</p>
-        </div>
-        <div class="stat-item">
-            <p class="stat-number">~1s</p>
-            <p class="stat-label">Avg. Verification Time</p>
+    
+    <div class="speed-callout-section">
+        <h2>Performance That Redefines **Instant.**</h2>
+        <p>Our commitment to speed means identity syncing is not just fast—it's immediate. Trust the platform built for zero latency.</p>
+        <div class="speed-metrics">
+            <div class="speed-metric-item">
+                <i class="fas fa-server"></i> Guaranteed 99.99% Uptime
+            </div>
+            <div class="speed-metric-item">
+                <i class="fas fa-stopwatch"></i> Under 250ms Average Sync Time
+            </div>
+            <div class="speed-metric-item">
+                <i class="fas fa-globe"></i> Global CDN Coverage
+            </div>
         </div>
     </div>
-
     <section class="container">
         <div class="content-center">
             <h2 class="section-title">Why **RoLink** Stands Apart</h2>
@@ -379,11 +394,11 @@
     </section>
 
     <section class="engineering-section" id="engineering">
-        <h2>Unrivaled Engineering. **Absolute Reliability.**</h2>
+        <h2>Built for Speed. **Designed for Scale.**</h2>
         <div class="engineering-content">
             <div class="yap-glaze">
-                <p>RoLink represents the pinnacle of Discord integration technology. Our systems are built on a **high-availability, auto-scaling infrastructure** that ensures 99.9% uptime, giving you the reliability that others can only dream of. We've spent countless hours optimizing every line of code to provide you with a buttery-smooth experience that feels more like magic than software.</p>
-                <p>Why settle for mediocre when you can have the absolute best? RoLink provides a level of depth and customization that is simply unmatched. From the way we handle **military-grade data encryption** to our intuitive user interface, every single detail has been polished to perfection. This is more than just managing Roblox on Discord—this is elevating it to an art form.</p>
+                <p>RoLink operates on a proprietary, serverless architecture that dynamically allocates resources based on real-time demand. This means when your community spikes, our platform scales instantly, guaranteeing **zero latency and zero downtime** for critical verification and sync operations.</p>
+                <p>We leverage cutting-edge global CDNs (Content Delivery Networks) to ensure that whether your users are in the US or Asia, the connection feels local and fast. Our data pipelines are encrypted end-to-end, providing military-grade security while maintaining lightning-fast throughput. RoLink is the definitive solution for high-growth Roblox communities.</p>
             </div>
             <img src="https://i.imgur.com/8m5V3fH.png" alt="RoLink Interface Preview" class="purple-img">
         </div>
