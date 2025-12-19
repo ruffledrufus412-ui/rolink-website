@@ -3,143 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoLink | Radical Verification</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>RoLink | The Bridge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff3e3e; /* Brighter, more aggressive red */
-            --bg: #0a0a0a;      /* Pure black for high contrast */
-            --surface: #151515;
-            --border: #222;
+            --primary: #ff3e3e;
+            --primary-glow: rgba(255, 62, 62, 0.2);
+            --bg: #08080a;
+            --card-bg: #111114;
+            --border: rgba(255, 255, 255, 0.08);
         }
 
+        html { scroll-behavior: smooth; }
         body { 
-            font-family: 'Space Grotesk', sans-serif; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
             margin: 0; 
             background-color: var(--bg); 
             color: white;
+            overflow-x: hidden;
         }
 
-        /* [PURPLE BOX] UNIQUE HEADER */
+        /* HEADER */
         .header { 
-            display: flex;
-            justify-content: space-between;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 8%; background: rgba(8, 8, 10, 0.8);
+            backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 22px; font-weight: 800; text-decoration: none; color: white; }
+        .logo span { color: var(--primary); }
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .nav-right a { color: #888; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .nav-right a:hover { color: white; }
+        .btn-discord { background: #5865F2; color: white !important; padding: 8px 18px; border-radius: 100px; font-weight: 600; }
+
+        /* HERO - ASYMMETRICAL (Boxes to the Right) */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            padding: 100px 8%;
             align-items: center;
-            padding: 20px 5%;
-            border-bottom: 2px solid var(--primary); /* Thick red line instead of shadow */
+            min-height: 80vh;
         }
-        .brand { display: flex; align-items: center; gap: 15px; }
-        .logo { font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: -1px; }
-        .btn-discord { background: white; color: black; padding: 10px 20px; border-radius: 0px; text-decoration: none; font-weight: 700; transition: 0.2s; }
-        .btn-discord:hover { background: var(--primary); color: white; }
 
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { color: #888; text-decoration: none; font-weight: 500; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
-        .nav-links a:hover { color: var(--primary); }
-
-        /* [GREEN BOX] THE NEW HERO */
-        .hero {
-            padding: 100px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-            border-left: 1px solid var(--border);
-            border-right: 1px solid var(--border);
-        }
-        .hero h1 { font-size: clamp(40px, 8vw, 90px); line-height: 0.9; margin: 0; font-weight: 700; text-transform: uppercase; }
-        .hero p { font-size: 20px; color: #666; max-width: 500px; margin: 30px 0; }
-
+        .hero-text h1 { font-size: clamp(40px, 5vw, 64px); line-height: 1.1; margin-bottom: 25px; }
+        .hero-text p { color: #888; font-size: 18px; margin-bottom: 40px; }
+        
         .input-group { 
-            display: flex; 
-            background: var(--surface); 
-            padding: 5px; 
-            border: 1px solid var(--border);
-            max-width: 500px;
+            background: var(--card-bg); border: 1px solid var(--border);
+            padding: 6px; border-radius: 14px; display: flex; max-width: 400px;
         }
         .input-group input { 
-            flex: 1; 
-            background: transparent; 
-            border: none; 
-            color: white; 
-            padding: 15px; 
-            font-family: inherit; 
-            outline: none; 
+            flex: 1; background: transparent; border: none; 
+            color: white; padding: 12px; outline: none; font-family: inherit;
         }
         .btn-verify { 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            padding: 0 30px; 
-            font-weight: 700; 
-            cursor: pointer;
-            text-transform: uppercase;
+            background: var(--primary); color: white; border: none; 
+            padding: 10px 25px; border-radius: 10px; font-weight: 700; cursor: pointer;
         }
 
-        /* [RED BOX] BOLD FEATURE LIST */
-        .features-container {
-            border-top: 1px solid var(--border);
-            display: flex;
-            flex-wrap: wrap;
+        /* FEATURE BOXES (Right Side) */
+        .feature-stack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
-        .feature-item {
-            flex: 1;
-            min-width: 300px;
-            padding: 40px;
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+        .f-box {
+            background: var(--card-bg); border: 1px solid var(--border);
+            padding: 25px; border-radius: 20px; transition: 0.3s;
         }
-        .feature-item span { color: var(--primary); font-weight: 700; font-size: 14px; display: block; margin-bottom: 10px; }
-        .feature-item h3 { font-size: 24px; margin: 0 0 10px 0; }
-        .feature-item p { color: #666; margin: 0; }
+        .f-box:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .f-box h3 { margin: 0 0 10px; font-size: 18px; }
+        .f-box p { color: #666; font-size: 14px; margin: 0; }
 
-        /* SCROLL SECTION */
-        .cta-footer {
-            padding: 100px 5%;
+        /* THE YAP PAGE (Second Screen) */
+        .yap-section {
+            padding: 150px 8%;
+            background: linear-gradient(to bottom, #08080a, #120505);
             text-align: center;
-            border-bottom: 1px solid var(--border);
         }
-        .cta-footer h2 { font-size: 48px; margin-bottom: 40px; }
-        .btn-huge { font-size: 32px; font-weight: 700; color: white; text-decoration: underline; text-decoration-color: var(--primary); text-underline-offset: 10px; }
+        .yap-container { max-width: 900px; margin: 0 auto; }
+        .yap-badge { 
+            background: var(--primary-glow); color: var(--primary); 
+            padding: 6px 15px; border-radius: 50px; font-size: 12px; 
+            font-weight: 800; letter-spacing: 1px; display: inline-block; margin-bottom: 20px;
+        }
+        .yap-section h2 { font-size: 48px; margin-bottom: 30px; }
+        .yap-section p { color: #aaa; font-size: 20px; line-height: 1.8; margin-bottom: 40px; }
 
-        .footer { padding: 40px 5%; color: #333; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        /* THE FINAL CTA */
+        .cta-section {
+            padding: 120px 8%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        .cta-section h2 { font-size: 56px; font-weight: 800; margin-bottom: 10px; }
+        .cta-section p { color: var(--primary); font-weight: 600; font-size: 24px; margin-bottom: 50px; }
+        .btn-final { 
+            background: white; color: black; padding: 22px 60px; 
+            border-radius: 100px; font-size: 20px; font-weight: 800; 
+            text-decoration: none; transition: 0.3s;
+            display: inline-block;
+        }
+        .btn-final:hover { background: var(--primary); color: white; transform: scale(1.05); }
+
+        .footer { padding: 50px 8%; text-align: center; color: #333; font-size: 13px; }
+
+        @media (max-width: 968px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .input-group { margin: 0 auto; }
+            .feature-stack { margin-top: 40px; }
+        }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <div class="brand">
-            <div class="logo">RoLink</div>
-            <a href="#" class="btn-discord">Sign in with Discord</a>
-        </div>
-        <nav class="nav-links">
+        <a href="#" class="logo">Ro<span>Link</span></a>
+        <nav class="nav-right">
             <a href="#">Features</a>
             <a href="#">Invite</a>
             <a href="#">Support</a>
+            <a href="#" class="btn-discord">Login with Discord</a>
         </nav>
     </header>
 
-    <main class="hero">
-        <h1>Verify.<br>Sync.<br>Secure.</h1>
-        <p>The definitive bridge between Roblox and your Discord community.</p>
-        
-        <form action="/verify" method="GET" class="input-group">
-            <input type="text" name="username" placeholder="ROBLOX USERNAME" required>
-            <button type="submit" class="btn-verify">Verify</button>
-        </form>
-        <div style="margin-top: 15px; font-size: 11px; color: #444;">By using RoLink you agree to our TOS & Privacy Policy.</div>
+    <main class="hero-grid">
+        <div class="hero-text">
+            <h1>Connect Roblox <br>to your community.</h1>
+            <p>The definitive bridge for group management, role automation, and server security. Built for scale.</p>
+            
+            <form action="/verify" method="GET" class="input-group">
+                <input type="text" name="username" placeholder="Roblox Username" required>
+                <button type="submit" class="btn-verify">Verify</button>
+            </form>
+        </div>
+
+        <div class="feature-stack">
+            <div class="f-box"><h3>⚡ Instant</h3><p>Real-time role syncing across all devices.</p></div>
+            <div class="f-box"><h3>🛡️ Secure</h3><p>Enterprise-grade encryption for your data.</p></div>
+            <div class="f-box"><h3>📊 Stats</h3><p>Deep analytics for your group growth.</p></div>
+            <div class="f-box"><h3>🔗 API</h3><p>Custom webhooks for your developers.</p></div>
+        </div>
     </main>
 
-    <section class="features-container">
-        <div class="feature-item"><span>01</span><h3>Instant Sync</h3><p>Ranks update the second they change on Roblox.</p></div>
-        <div class="feature-item"><span>02</span><h3>Group Guard</h3><p>Auto-kick users who leave your Roblox group.</p></div>
-        <div class="feature-item"><span>03</span><h3>Global Bans</h3><p>Protected by the RoLink global database.</p></div>
-        <div class="feature-item"><span>04</span><h3>No Limits</h3><p>Unlimited roles, unlimited servers, always free.</p></div>
-        <div class="feature-item"><span>05</span><h3>Developer API</h3><p>Build your own custom tools on top of RoLink.</p></div>
-        <div class="feature-item"><span>06</span><h3>Fast Support</h3><p>Active developers ready to help you 24/7.</p></div>
+    <section class="yap-section">
+        <div class="yap-container">
+            <div class="yap-badge">WHY WE EXIST</div>
+            <h2>Beyond just a bot.</h2>
+            <p>Most verification systems are clunky, slow, and outdated. RoLink was engineered from the ground up to handle massive traffic while maintaining millisecond response times. Whether you are a small startup group or a multi-million member community, RoLink scales with you effortlessly.</p>
+            <div style="height: 100px;"></div>
+            <div class="yap-badge">OUR PROMISE</div>
+            <h2>Zero cost. Zero lag.</h2>
+            <p>We believe every group owner deserves professional tools without a monthly subscription. RoLink is, and always will be, free for everyone. No hidden paywalls, no "premium-only" core features. Just pure, unadulterated performance.</p>
+        </div>
     </section>
 
-    <section class="cta-footer">
+    <section class="cta-section">
         <h2>What are you waiting for?</h2>
-        <a href="#" class="btn-huge">Get started with RoLink today.</a>
+        <p>Get started with RoLink today.</p>
+        <a href="#" class="btn-final">Add to Discord</a>
     </section>
 
     <footer class="footer">
