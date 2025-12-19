@@ -115,11 +115,11 @@
             border-radius: 15px;
             transition: 0.3s;
             height: 100%;
-            /* FIX: Add margin-bottom to create space between stacked cards in the grid row */
+            /* Adds space between vertically stacked cards in the grid row */
             margin-bottom: 20px; 
         }
         /* Remove extra margin on the last item in a column/grid to avoid excessive padding */
-        .features-grid .feature-card:nth-child(3n) { /* Only applies to 3-column grids, fine for this structure */
+        .features-grid .feature-card:nth-child(3n) {
             margin-bottom: 0;
         }
 
@@ -132,13 +132,22 @@
             padding: 40px 8%;
             margin-bottom: 20px;
         }
-        .bg-card { /* New class for the security/control section background */
+        .bg-card { /* Class for the security/control and CTA section backgrounds */
             background: var(--card-bg); 
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             margin: 0 0 60px 0;
             padding-top: 40px;
             padding-bottom: 40px;
+        }
+        
+        /* FIX: Greatly increase top padding for the security section to push it down */
+        #security-control { 
+            padding-top: 80px; /* Increased top padding */
+        }
+        /* Adjusting the section margins around the trust callout for better flow */
+        .trust-callout-section {
+            padding: 80px 8% 40px; /* More top margin */
         }
 
 
@@ -353,7 +362,7 @@
         </div>
     </section>
 
-    <div class="feature-section">
+    <div class="trust-callout-section">
         <div class="content-center">
             <h2 class="section-title">A Foundation Built on Trust and Simplicity.</h2>
             <p class="section-subtitle">We handle the heavy lifting, ensuring every connection is secure and every role is accurate, every time. Integrity is our priority.</p>
@@ -376,7 +385,7 @@
             </div>
         </div>
     </div>
-    <section class="feature-section bg-card">
+    <section class="feature-section bg-card" id="security-control">
         <div class="content-center">
             <h2 class="section-title">Advanced Security & Control</h2>
             <p class="section-subtitle">Tools to combat bad actors and grant staff maximum administrative power.</p>
