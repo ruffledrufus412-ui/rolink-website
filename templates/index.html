@@ -115,7 +115,14 @@
             border-radius: 15px;
             transition: 0.3s;
             height: 100%;
+            /* FIX: Add margin-bottom to create space between stacked cards in the grid row */
+            margin-bottom: 20px; 
         }
+        /* Remove extra margin on the last item in a column/grid to avoid excessive padding */
+        .features-grid .feature-card:nth-child(3n) { /* Only applies to 3-column grids, fine for this structure */
+            margin-bottom: 0;
+        }
+
         .feature-card:hover { border-color: var(--primary); }
         .feature-card i { color: var(--primary); font-size: 24px; margin-bottom: 10px; }
         .feature-card h3 { font-size: 18px; font-weight: 700; margin: 5px 0 10px; }
@@ -248,6 +255,13 @@
             .commands-section {
                 margin: 0 5% 40px;
                 padding: 30px;
+            }
+             /* On mobile, remove the margin between feature cards completely, relying only on grid gap */
+            .feature-card {
+                margin-bottom: 0;
+            }
+            .features-grid {
+                gap: 15px;
             }
         }
     </style>
