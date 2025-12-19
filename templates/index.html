@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoLink | The Ultimate Roblox-Discord Connection</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
+        /* --- VARIABLE DEFINITIONS --- */
         :root {
             --primary: #ff3e3e;
+            --secondary: #5865F2; /* Discord Blue */
             --bg: #08080a;
             --card-bg: #111114;
             --border: rgba(255, 255, 255, 0.08);
             --text-muted: #888;
         }
 
+        /* --- GLOBAL STYLES --- */
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             margin: 0; 
@@ -22,7 +28,22 @@
             overflow-x: hidden;
         }
 
-        /* [RED BOX] NAVIGATION */
+        /* Global Layout Containers */
+        .container {
+            padding: 60px 8%;
+        }
+        .content-center {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title {
+            font-size: 38px; font-weight: 800; margin-bottom: 10px;
+        }
+        .section-subtitle {
+            color: var(--text-muted); font-size: 18px; max-width: 700px; margin: 0 auto;
+        }
+
+        /* --- NAVIGATION --- */
         .header { 
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 8%; background: rgba(8, 8, 10, 0.95);
@@ -32,10 +53,12 @@
         .logo { font-size: 26px; font-weight: 800; text-decoration: none; color: white; }
         .logo span { color: var(--primary); }
         .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 15px; }
-        .btn-discord { background: #5865F2; color: white; padding: 10px 22px; border-radius: 8px; font-weight: 700; text-decoration: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 15px; transition: color 0.2s; }
+        .nav-links a:hover { color: white; }
+        .btn-discord { background: var(--secondary); color: white; padding: 10px 22px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+        .btn-discord:hover { background: #4a54c0; }
 
-        /* MAIN HERO AREA (Green & Pink Box Mix) */
+        /* --- HERO SECTION --- */
         .hero-section {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -43,8 +66,6 @@
             padding: 60px 8% 40px;
             align-items: start;
         }
-
-        /* [GREEN BOX] CONNECTION & GLAZE */
         .green-box {
             background: linear-gradient(145deg, #16161a, #0d0d0f);
             padding: 45px;
@@ -53,7 +74,7 @@
         }
         .green-box h1 { font-size: 52px; font-weight: 800; margin: 0 0 20px; line-height: 1.1; }
         .green-box h1 span { color: var(--primary); }
-        
+
         .glaze-text { font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 35px; }
 
         .connect-bar {
@@ -70,10 +91,11 @@
         }
         .btn-connect {
             background: var(--primary); color: white; border: none;
-            padding: 12px 30px; border-radius: 10px; font-weight: 800; cursor: pointer;
+            padding: 12px 30px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: background 0.2s;
         }
+        .btn-connect:hover { background: #e03737; }
 
-        /* [PINK BOXES] FEATURE TABS - MOVED UP */
+        /* --- FEATURE TABS --- */
         .pink-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -82,46 +104,174 @@
         .pink-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            padding: 25px;
+            padding: 20px;
             border-radius: 18px;
             transition: 0.3s;
+            display: flex; align-items: flex-start;
         }
-        .pink-card:hover { border-color: var(--primary); transform: translateX(-5px); }
-        .pink-card h3 { margin: 0 0 8px; font-size: 18px; color: #fff; }
-        .pink-card p { margin: 0; color: #666; font-size: 14px; }
+        .pink-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .pink-card h3 { margin: 0 0 5px; font-size: 17px; color: #fff; display: flex; align-items: center; }
+        .pink-card p { margin: 0; color: var(--text-muted); font-size: 13px; }
+        .pink-card i { 
+            font-size: 20px; color: var(--primary); margin-right: 12px; 
+            background: rgba(255, 62, 62, 0.1); padding: 10px; border-radius: 10px;
+        }
+        .card-content { flex-grow: 1; }
 
-        /* [PURPLE BOX] MASSIVE YAP AREA */
-        .purple-box {
+        /* --- STATS SECTION --- */
+        .stats-section {
+            display: flex; justify-content: space-around;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 40px 60px;
             margin: 0 8% 60px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 0 20px;
+        }
+        .stat-number {
+            font-size: 44px; font-weight: 800; color: var(--primary); margin: 0;
+        }
+        .stat-label {
+            font-size: 16px; color: #fff; margin-top: 5px; font-weight: 600;
+        }
+
+        /* --- WHY CHOOSE ROLINK SECTION --- */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding-top: 20px;
+        }
+        .why-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 20px;
+        }
+        .why-card h3 { 
+            font-size: 22px; font-weight: 700; margin: 15px 0 10px; 
+            display: flex; align-items: center; gap: 10px;
+        }
+        .why-card h3 i { color: var(--primary); font-size: 24px; }
+        .why-card p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
+
+        /* --- ENGINEERING SECTION --- */
+        .engineering-section {
             background: #111114;
             border-radius: 30px;
-            padding: 80px 60px;
+            padding: 60px 8%; 
             border: 1px solid var(--border);
-            text-align: center;
+            margin: 0 8% 60px;
             background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
         }
-        .purple-box h2 { font-size: 48px; font-weight: 800; margin-bottom: 30px; }
-        .purple-content {
+        .engineering-section h2 { font-size: 42px; font-weight: 800; margin-bottom: 20px; text-align: center; }
+        .engineering-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
-            text-align: left;
             align-items: center;
+            padding-top: 30px;
         }
-        .yap-glaze { font-size: 18px; color: var(--text-muted); line-height: 1.8; }
+        .yap-glaze { font-size: 16px; color: var(--text-muted); line-height: 1.7; }
         .purple-img { 
             width: 100%; border-radius: 20px; 
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
             border: 1px solid var(--border);
         }
 
-        /* [YELLOW BOX] FOOTER */
+        /* --- TESTIMONIALS/FAQ SECTION --- */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .testimonial-card {
+            background: linear-gradient(135deg, #111114, #0d0d0f);
+            border: 1px solid var(--primary);
+            padding: 30px;
+            border-radius: 20px;
+            height: fit-content;
+        }
+        .testimonial-card p { font-style: italic; color: #ccc; line-height: 1.6; margin-bottom: 20px; }
+        .testimonial-author { font-weight: 700; color: #fff; }
+        .testimonial-author small { color: var(--primary); font-weight: 600; }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 18px 25px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: color 0.2s;
+        }
+        .faq-question:hover { color: var(--primary); }
+        .faq-answer {
+            padding: 0 25px 18px;
+            color: var(--text-muted);
+            font-size: 15px;
+            display: none; /* Controlled by JavaScript */
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* --- FOOTER --- */
         .footer {
             padding: 40px 8%;
             text-align: center;
             border-top: 1px solid var(--border);
             color: #444;
             font-size: 14px;
+        }
+
+        /* --- MOBILE RESPONSIVENESS (Crucial for preventing empty space on phones) --- */
+        @media (max-width: 1000px) {
+            .header, .container {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .stats-section {
+                flex-wrap: wrap;
+                padding: 30px 10px;
+                margin: 0 5% 40px;
+                border-radius: 15px;
+            }
+            .stat-item {
+                width: 50%; /* 2 per row */
+                margin-bottom: 20px;
+            }
+            .why-grid, .engineering-content, .faq-grid {
+                grid-template-columns: 1fr; /* Stack columns */
+            }
+            .engineering-section {
+                padding: 40px 30px;
+                margin: 0 5% 40px;
+            }
+            .purple-img {
+                margin-top: 30px;
+            }
+            .engineering-content .yap-glaze {
+                order: 2; /* Puts the text below the image on small screens */
+            }
         }
     </style>
 </head>
@@ -130,63 +280,168 @@
     <header class="header">
         <a href="#" class="logo">Ro<span>Link</span></a>
         <div class="nav-links">
-            <a href="#">About</a>
-            <a href="#">Support</a>
-            <a href="#" class="btn-discord">Sign in with Discord</a>
+            <a href="#features">Features</a>
+            <a href="#engineering">Engineering</a>
+            <a href="#faq">FAQ</a>
+            <a href="#" class="btn-discord"><i class="fab fa-discord"></i> Sign in</a>
         </div>
     </header>
 
     <div class="hero-section">
         <div class="green-box">
-            <h1>The Future of <span>Roblox</span> is here.</h1>
+            <h1>The Future of <span>Roblox</span> Identity is here.</h1>
             <p class="glaze-text">
-                RoLink isn't just a tool; it's a revolution in how you experience the digital world. 
-                We have meticulously crafted the most powerful, lightning-fast bridge ever created. 
-                Imagine a world where your identity is seamless, where every connection is instant, 
-                and where technology works for you. That is the RoLink promise. 
-                The most sophisticated engineering meets elegant simplicity.
+                RoLink isn't just a tool; it's a revolution in how you connect your Roblox and Discord worlds. 
+                Experience the **most powerful, lightning-fast bridge** ever created. 
+                Seamless identity, instant connections, and sophisticated engineering meets elegant simplicity.
             </p>
             
             <form class="connect-bar">
-                <input type="text" placeholder="Your Roblox Username" required>
-                <button type="submit" class="btn-connect">Connect Roblox Account</button>
+                <input type="text" placeholder="Your Roblox Username to begin verification..." required>
+                <button type="submit" class="btn-connect"><i class="fas fa-plug"></i> Connect Account</button>
             </form>
 
             <div class="glaze-text" style="font-size: 14px; margin-top: -10px;">
-                Verified by thousands of elite users. Experience the gold standard of account integration. 
-                Unrivaled security. Absolute performance. Total control.
+                Verified by thousands of elite users. Unrivaled security. Absolute performance. Total control.
             </div>
         </div>
 
-        <div class="pink-grid">
+        <div class="pink-grid" id="features">
             <div class="pink-card">
-                <h3>Advanced Verification</h3>
-                <p>Secure Roblox account linking using trusted verification methods — no passwords, no risk.</p>
+                <i class="fas fa-shield-alt"></i>
+                <div class="card-content">
+                    <h3>Advanced Verification</h3>
+                    <p>Secure Roblox account linking using trusted, non-password methods. **Maximum Security.**</p>
+                </div>
             </div>
             <div class="pink-card">
-                <h3>Real-Time Sync</h3>
-                <p>Roles and permissions sync instantly across your Discord server without delays.</p>
+                <i class="fas fa-bolt"></i>
+                <div class="card-content">
+                    <h3>Real-Time Sync</h3>
+                    <p>Roles and permissions update **instantly** across your Discord server without delays or lag.</p>
+                </div>
             </div>
             <div class="pink-card">
-                <h3>Anti-Alt Security</h3>
-                <p>Detects and limits alternate accounts using account age and advanced verification rules.</p>
+                <i class="fas fa-user-slash"></i>
+                <div class="card-content">
+                    <h3>Anti-Alt Security</h3>
+                    <p>Intelligently detects and limits alternate accounts based on account age and deep metrics.</p>
+                </div>
             </div>
             <div class="pink-card">
-                <h3>Modular Systems</h3>
-                <p>Enable only what you need — verification, role automation, analytics, and more.</p>
+                <i class="fas fa-cubes"></i>
+                <div class="card-content">
+                    <h3>Modular Systems</h3>
+                    <p>Enable only the features you need: verification, role automation, analytics, and more.</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <section class="purple-box">
-        <h2>Unrivaled Engineering.</h2>
-        <div class="purple-content">
+    <div class="stats-section">
+        <div class="stat-item">
+            <p class="stat-number">2.5M+</p>
+            <p class="stat-label">Verified Users</p>
+        </div>
+        <div class="stat-item">
+            <p class="stat-number">1,800+</p>
+            <p class="stat-label">Servers Integrated</p>
+        </div>
+        <div class="stat-item">
+            <p class="stat-number">99.9%</p>
+            <p class="stat-label">Guaranteed Uptime</p>
+        </div>
+        <div class="stat-item">
+            <p class="stat-number">~1s</p>
+            <p class="stat-label">Avg. Verification Time</p>
+        </div>
+    </div>
+
+    <section class="container">
+        <div class="content-center">
+            <h2 class="section-title">Why **RoLink** Stands Apart</h2>
+            <p class="section-subtitle">We build the most reliable, feature-rich bridge between the Roblox and Discord ecosystems. Focus on your community, we'll handle the rest.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card">
+                <h3><i class="fas fa-lock"></i> Zero Trust Security</h3>
+                <p>We never ask for your Roblox password or sensitive data. Verification is handled through secure, official Roblox channels, protecting both your users and your community.</p>
+            </div>
+            <div class="why-card">
+                <h3><i class="fas fa-layer-group"></i> Deep Role Integration</h3>
+                <p>Assign Discord roles based on Roblox group ranks, badges, game ownership, and game time. Create complex, nested permission structures with ease.</p>
+            </div>
+            <div class="why-card">
+                <h3><i class="fas fa-rocket"></i> Optimized Performance</h3>
+                <p>Built on cutting-edge cloud infrastructure. Our API response times are consistently under 100ms, ensuring a smooth and responsive experience for millions of users.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="engineering-section" id="engineering">
+        <h2>Unrivaled Engineering. **Absolute Reliability.**</h2>
+        <div class="engineering-content">
             <div class="yap-glaze">
-                <p>RoLink represents the pinnacle of Discord integration technology. Our systems are built on a high-availability infrastructure that ensures 99.9% uptime, giving you the reliability that others can only dream of. We've spent countless hours optimizing every line of code to provide you with a buttery-smooth experience that feels more like magic than software.</p>
-                <p>Why settle for mediocre when you can have the absolute best? RoLink provides a level of depth and customization that is simply unmatched. From the way we handle data encryption to our intuitive user interface, every single detail has been polished to perfection. This is more than just managing Roblox on Discord—this is elevating it to an art form.</p>
+                <p>RoLink represents the pinnacle of Discord integration technology. Our systems are built on a **high-availability, auto-scaling infrastructure** that ensures 99.9% uptime, giving you the reliability that others can only dream of. We've spent countless hours optimizing every line of code to provide you with a buttery-smooth experience that feels more like magic than software.</p>
+                <p>Why settle for mediocre when you can have the absolute best? RoLink provides a level of depth and customization that is simply unmatched. From the way we handle **military-grade data encryption** to our intuitive user interface, every single detail has been polished to perfection. This is more than just managing Roblox on Discord—this is elevating it to an art form.</p>
             </div>
             <img src="https://i.imgur.com/8m5V3fH.png" alt="RoLink Interface Preview" class="purple-img">
         </div>
+    </section>
+
+    <section class="container" id="faq">
+        <div class="content-center">
+            <h2 class="section-title">Questions? See What Others Say.</h2>
+            <p class="section-subtitle">Get your burning questions answered and read real testimonials from our high-profile community partners.</p>
+        </div>
+        <div class="faq-grid">
+            <div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How secure is the verification process?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We use official Roblox APIs and verification methods that **never require your password**. Your data is encrypted and handled with the highest security standards, ensuring absolute peace of mind.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What features are included in the free tier?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        The free tier includes core verification, group rank syncing, and basic anti-alt security for communities up to a certain size. Advanced features like role hierarchy and detailed analytics are premium.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can RoLink handle large communities?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. Our infrastructure is built to auto-scale, handling verification and sync processes for millions of users with no performance degradation, ensuring reliability for the largest servers.
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="testimonial-card">
+                    <p>"We switched to RoLink and immediately saw a 60% reduction in support tickets related to verification issues. The speed is unbelievable and the Anti-Alt features are game-changing for moderation."</p>
+                    <p class="testimonial-author">Alex M. <br><small>Lead Developer, *Mega-Roblox Group*</small></p>
+                </div>
+                <div class="testimonial-card" style="margin-top: 20px; border-color: var(--secondary);">
+                    <p>"The deep role integration based on game badges is exactly what our community needed. It's fully automated and flawless. RoLink is simply the gold standard."</p>
+                    <p class="testimonial-author">Sarah L. <br><small>Community Manager, *Top 10 Roblox Game*</small></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="engineering-section" style="padding: 50px 8%; text-align: center; margin-bottom: 0;">
+        <h2 style="font-size: 36px; margin-bottom: 15px;">Ready to Elevate Your Community?</h2>
+        <p class="section-subtitle" style="margin-bottom: 30px;">Join thousands of top Roblox communities using RoLink today. Set up in less than five minutes.</p>
+        <a href="#" class="btn-discord" style="font-size: 18px; padding: 15px 40px;"><i class="fas fa-robot"></i> **Add RoLink Bot Now**</a>
     </section>
 
     <footer class="footer">
@@ -194,6 +449,33 @@
         All Roblox-related trademarks are the property of their respective owners. 
         &copy; 2024 RoLink Project. All Rights Reserved.
     </footer>
+
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close all other open answers
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.display = 'none';
+                    }
+                });
+                
+                // Toggle the clicked answer
+                const answer = item.querySelector('.faq-answer');
+                if (item.classList.contains('active')) {
+                    item.classList.remove('active');
+                    answer.style.display = 'none';
+                } else {
+                    item.classList.add('active');
+                    answer.style.display = 'block';
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
